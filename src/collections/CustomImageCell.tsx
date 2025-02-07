@@ -1,12 +1,13 @@
 import React from 'react'
-import config from '@/payload.config'
 import Image from 'next/image'
-import { getPayload, type DefaultServerCellComponentProps } from 'payload'
+import { type DefaultServerCellComponentProps } from 'payload'
 
-const MyComponent = async (props: DefaultServerCellComponentProps) => {
-  const payload = await getPayload({ config })
+const MyComponent = async ({ cellData, payload }: DefaultServerCellComponentProps) => {
+    
+  // thanks to Jarrod for the following simplification, payload
+  // is already available in the props so no need to load config
+  // and get payload again
 
-  const { cellData } = props
   const media = await payload.findByID({
     collection: 'media',
     id: cellData,
@@ -14,8 +15,21 @@ const MyComponent = async (props: DefaultServerCellComponentProps) => {
   console.log(media)
 
   return (
-    <div style={{ width: '80px', height: '80px' }}>
-      <Image src={media.url!} alt={media.alt} width={80} height={80} />
+    <div
+      style={{
+        position: 'relative',
+        width: '80px',
+        height: '80px',
+      }}
+    >
+      <Image
+        src={media.url!}
+        alt={media.alt}
+        fill
+        style={{
+          objectFit: 'contain',
+        }}
+      />
     </div>
   )
 }
