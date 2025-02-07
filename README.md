@@ -1,8 +1,3 @@
-# blank
+# Custom Cell Image Component in Payload CMS
 
-blank
-
-## Attributes
-
-- **Database**: mongodb
-- **Storage Adapter**: localDisk
+VIDEO - https://youtu.be/d1MN2W5fVEE
